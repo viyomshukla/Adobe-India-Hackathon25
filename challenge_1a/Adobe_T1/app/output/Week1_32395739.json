@@ -1,0 +1,170 @@
+{
+  "title": "Assignment1: Personal Portfolio Website",
+  "outline": [
+    {
+      "level": "H1",
+      "text": "Assignment1: Personal Portfolio Website",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "Objective:",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "The objective of this project is to apply the knowledge you have gained about HTML,",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "the basic structure of a webpage, and creating headings, paragraphs, lists, and links to create a",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "personal portfolio website.",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "Instructions:",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "1. Project Description:",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Create a personal portfolio website showcasing your skills, interests, and projects. This website will",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "serve as a platform to highlight your achievements and showcase your work to potential employers",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "or clients",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "2. Basic Structure:",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Design the basic structure of your webpage using HTML.",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Include a <!DOCTYPE html> declaration at the beginning.",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Utilize <html>, <head>, and <body> tags to structure your page",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "3. Page Title and Heading:",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Set the title of the page to \"Your Name - Portfolio\".",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Create a <h1> heading with your name at the top of the page to serve as the main heading",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "4. About Me Section:",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Add an \"About Me\" section using <section> or <div> tags.",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Include a <h2> heading with the text \"About Me\".",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Write a paragraph describing yourself, your background, and your interests. Highlight what makes",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "you unique.",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "5. Skills and Interests:",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "Create an unordered list (<ul>) or ordered list (<ol>) to list your skills and interests. Include at least 3",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "items in each list.",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "6. Projects Section:",
+      "page": 2
+    },
+    {
+      "level": "H3",
+      "text": "Add a section to showcase your projects.",
+      "page": 2
+    },
+    {
+      "level": "H3",
+      "text": "For each project, include a heading (<h3>), a brief description, and a link to the project (if",
+      "page": 2
+    },
+    {
+      "level": "H3",
+      "text": "applicable).",
+      "page": 2
+    },
+    {
+      "level": "H3",
+      "text": "7. Contact Information:",
+      "page": 2
+    },
+    {
+      "level": "H3",
+      "text": "Create a section for your contact information.",
+      "page": 2
+    },
+    {
+      "level": "H3",
+      "text": "Include your email address and optionally, links to your professional social media profiles (e.g.,",
+      "page": 2
+    },
+    {
+      "level": "H3",
+      "text": "LinkedIn, GitHub).",
+      "page": 2
+    }
+  ]
+}
