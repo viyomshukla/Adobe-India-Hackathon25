@@ -123,8 +123,10 @@ README.md
 - No internet access required.
 - Model-free (no >200MB models used).
 - CPU-only, completes a 50-page PDF in under 10 seconds (on typical x86_64 hardware).
+- 
 
 ---
+##Screeshots <img width="1600" height="900" alt="Image" src="https://github.com/user-attachments/assets/49876f3d-a45d-4bdb-a722-3fd06e6df943" />
 
 ## 📝 Notes
 
