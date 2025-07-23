@@ -2,6 +2,10 @@ import os
 import json
 import fitz  # PyMuPDF
 from collections import Counter, defaultdict
+import pdfplumber
+import pytesseract
+from pdf2image import convert_from_path
+import camelot
 
 INPUT_DIR = os.path.join(os.path.dirname(__file__), 'input')
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), 'output')
@@ -60,6 +64,32 @@ def detect_heading_levels(doc):
         levels[s] = f"H{idx+1}"
     return levels
 
+def extract_tables_pdfplumber(pdf_path):
+    tables = []
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            for table in page.extract_tables():
+                tables.append(table)
+    return tables
+
+def extract_tables_camelot(pdf_path):
+    try:
+        tables = camelot.read_pdf(pdf_path, pages='all')
+        return [t.df.values.tolist() for t in tables]
+    except Exception:
+        return []
+
+def ocr_pdf(pdf_path):
+    ocr_text = []
+    try:
+        images = convert_from_path(pdf_path)
+        for img in images:
+            text = pytesseract.image_to_string(img, lang='eng+jpn')
+            ocr_text.append(text)
+    except Exception:
+        pass
+    return ocr_text
+
 # Main extraction logic
 def extract_outline(pdf_path):
     doc = fitz.open(pdf_path)
@@ -75,9 +105,18 @@ def extract_outline(pdf_path):
                     'text': b['text'],
                     'page': page_num
                 })
+    # Try pdfplumber for tables and text
+    tables = extract_tables_pdfplumber(pdf_path)
+    # Try camelot for more tables
+    camelot_tables = extract_tables_camelot(pdf_path)
+    # OCR fallback for image-based PDFs
+    ocr_text = ocr_pdf(pdf_path)
     return {
         'title': title,
-        'outline': outline
+        'outline': outline,
+        'tables_pdfplumber': tables,
+        'tables_camelot': camelot_tables,
+        'ocr_text': ocr_text
     }
 
 def main():

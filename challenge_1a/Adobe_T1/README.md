@@ -110,6 +110,21 @@ README.md
 
 ---
 
+
+---
+## 🌏 Multilingual Support (Bonus)
+
+This solution supports extraction of headings and text from PDFs in **multiple languages**, including CJK scripts (e.g., Japanese, Chinese, Korean), Arabic, Hindi, and more.
+
+- The extraction logic is fully Unicode-aware.
+- Output JSON preserves all non-Latin characters.
+- No special configuration is needed—just place your multilingual PDFs in the `input` folder and run the batch processor.
+
+
+
+
+
 ## 👤 Author
 
 Viyom shukla, Nikhil sharma, Utkarsh mishra
+

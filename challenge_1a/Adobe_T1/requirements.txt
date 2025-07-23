@@ -1,3 +1,5 @@
-Flask>=2.0
-PyMuPDF==1.23.6 
-flask_cors
+PyMuPDF==1.23.6
+pdfplumber
+pdf2image
+pytesseract
+camelot-py[cv]
