@@ -17,4 +17,4 @@ RUN mkdir -p /app/input /app/output
 ENV PYTHONUNBUFFERED=1
 
 # Entry point: process all PDFs in /app/input and write to /app/output
-CMD ["python", "app/api.py"]
+CMD ["python", "app/main.py"]

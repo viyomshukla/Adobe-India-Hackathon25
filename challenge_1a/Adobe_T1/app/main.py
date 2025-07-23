@@ -44,9 +44,9 @@ def extract_title(doc):
     return "Untitled"
 
 # Helper: Detect heading levels by font size clustering
-def detect_heading_levels(doc, max_pages=5):
+def detect_heading_levels(doc):
     sizes = []
-    for i in range(min(max_pages, len(doc))):
+    for i in range(len(doc)):
         blocks = extract_blocks(doc[i])
         sizes.extend([b['size'] for b in blocks if len(b['text']) > 3])
     # Get the most common font sizes

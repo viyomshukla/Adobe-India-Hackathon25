@@ -26,75 +26,43 @@ The output is a JSON file per PDF, matching the following format:
 
 ---
 
-## ⚙️ Approach & Models/Libraries Used
+## ⚙️ Approach & Libraries Used
 
-### Backend
-- **Flask**: Lightweight Python web framework for the API.
-- **PyMuPDF (fitz)**: For fast, reliable PDF parsing and text extraction.
-- **flask_cors**: To enable CORS for frontend-backend communication.
-- **No ML models**: The solution is heuristic-based (font size, font weight, position) and does not use any large pre-trained models.
-
-### Frontend
-- **React**: Modern JavaScript library for building user interfaces.
-- **No ML models**: The frontend is a simple React app for file upload and result display.
+- **PyMuPDF (fitz):** For fast, reliable PDF parsing and text extraction.
+- **No ML models:** The solution is heuristic-based (font size, font weight, position) and does not use any large pre-trained models.
 
 ---
 
-## ▶️ How to Build and Run the Solution
+## ▶️ How to Build and Run the Solution (Batch Processing)
 
-### Backend (Flask API) with Docker
+### Prerequisites
+- **Docker** (Install from https://www.docker.com/products/docker-desktop/)
 
-1. **Install Docker** (if not already):
-   - Download from https://www.docker.com/products/docker-desktop/
-   - Start Docker Desktop.
+### Steps
 
+1. **Place your PDF files** in the `app/input/` directory.
 2. **Build the Docker image:**
    ```sh
-   docker build -t pdf-outline-backend .
+   cd Adobe_T1
+   docker build -t pdf-outline-batch .
    ```
-
-3. **Run the backend container:**
+3. **Run the Docker container:**
    ```sh
-   docker run -p 5000:5000 pdf-outline-backend
+   docker run --rm -v "$(pwd)/app/input:/app/app/input" -v "$(pwd)/app/output:/app/app/output" pdf-outline-batch
    ```
-   - The API will be available at [http://localhost:5000](http://localhost:5000)
-
-### Frontend (React App)
-
-1. Open a new terminal and navigate to the frontend directory:
-   ```sh
-   cd frontend
+   - On Windows PowerShell, use:
+   ```powershell
+   docker run --rm -v ${PWD}/app/input:/app/app/input -v ${PWD}/app/output:/app/app/output pdf-outline-batch
    ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Start the frontend:
-   ```sh
-   npm start
-   ```
-   - The app will open at [http://localhost:3000](http://localhost:3000)
-
----
-
-## 🛠️ API Usage
-
-- **Endpoint:** `POST /extract-outline`
-- **Description:** Accepts one or more PDF files and returns a JSON outline for each.
-- **How to use:**
-  - Use the frontend UI, or
-  - Use a tool like Postman/curl to POST PDF(s) to `http://localhost:5000/extract-outline` with form-data key `files`.
+4. **Results:**
+   - For each PDF in `app/input/`, a corresponding `.json` file will be created in `app/output/`.
 
 ---
 
 ## 📦 Dependencies
 
-- Python 3.8+
-- Flask
+- Python 3.10 (handled by Docker)
 - PyMuPDF (`fitz`)
-- flask_cors
-- Node.js (for frontend)
-- React, react-scripts (see `frontend/package.json`)
 
 All backend dependencies are listed in `requirements.txt`.
 
@@ -107,10 +75,6 @@ app/
   input/      # Input PDFs
   output/     # Output JSONs
   main.py     # Batch script
-  api.py      # Flask API
-frontend/
-  src/        # React source code
-  ...         # React config files
 requirements.txt
 Dockerfile
 README.md
@@ -129,8 +93,9 @@ README.md
 ## 📝 Notes
 
 - No hardcoded heading logic or document-specific rules.
-- No API or internet calls (except frontend-backend communication).
+- No API or internet calls.
 - Works fully offline.
+- Heading detection now uses **all pages** of each PDF for improved accuracy on long documents.
 
 ---
 
@@ -138,14 +103,11 @@ README.md
 
 | Task                | Command/URL                        |
 |---------------------|------------------------------------|
-| Build backend image | `docker build -t pdf-outline-backend .` |
-| Run backend         | `docker run -p 5000:5000 pdf-outline-backend` |
-| Start frontend      | `cd frontend && npm install && npm start` |
-| Backend API         | http://localhost:5000/extract-outline |
-| Frontend UI         | http://localhost:3000               |
+| Build batch image   | `docker build -t pdf-outline-batch .` |
+| Run batch processor | `docker run --rm -v "$(pwd)/app/input:/app/app/input" -v "$(pwd)/app/output:/app/app/output" pdf-outline-batch` |
 
 ---
 
 ## 👤 Author
 
-Viyom shukla,Nikhil sharma,utkarsh mishra
+Viyom shukla, Nikhil sharma, Utkarsh mishra
