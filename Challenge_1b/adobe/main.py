@@ -208,16 +208,15 @@ class DocumentIntelligenceSystem:
 
 def main():
     print("\U0001F50D Persona-Driven Document Intelligence System")
-    user_dir = input("Enter the path to the folder containing input.json and PDFs/: ").strip()
-    user_dir_path = Path(user_dir)
+    user_dir_path = Path("adobe/input")
     input_json_path = user_dir_path / "input.json"
-    pdfs_folder = user_dir_path / "PDFs"
-    output_json_path = user_dir_path / "challenge1b_output.json"
+    pdfs_folder = user_dir_path / "PDF"
+    output_json_path = Path("adobe/output/challenge1b_output.json")
     if not input_json_path.exists():
-        print(f"\u274C input.json not found in {user_dir}")
+        print(f"\u274C input.json not found in {user_dir_path}")
         return
     if not pdfs_folder.exists() or not pdfs_folder.is_dir():
-        print(f"\u274C PDFs/ folder not found in {user_dir}")
+        print(f"\u274C PDF folder not found in {user_dir_path}")
         return
     with open(input_json_path, 'r', encoding='utf-8') as f:
         input_data = json.load(f)

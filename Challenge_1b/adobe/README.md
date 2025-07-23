@@ -1,16 +1,6 @@
-# Persona-Driven Document Intelligence
+# Persona-Driven Document Intelligence (Batch Version)
 
-This project is a full-stack application for persona-driven document intelligence. It enables users to upload a set of PDFs and a persona/job description, and receive a tailored analysis of the documents based on the persona’s needs. The backend is built with Python (FastAPI), and the frontend is a ReactJS app.
-
----
-
-## Features
-
-- **Persona-Driven Analysis:** Extracts and ranks the most relevant sections from uploaded PDFs based on a user-defined persona and job-to-be-done.
-- **Automatic Section Identification:** Uses NLP to identify and extract meaningful sections from documents.
-- **Semantic Relevance Ranking:** Ranks document sections using sentence embeddings and persona/job keywords.
-- **Easy-to-Use Web Interface:** Upload PDFs and input.json, trigger analysis, and download results.
-- **Dockerized Backend:** Simple deployment and reproducibility.
+This project processes a set of PDFs and an input.json file to generate a persona-driven analysis as a JSON output. The backend is built with Python and runs as a batch job (no API, no frontend).
 
 ---
 
@@ -19,110 +9,78 @@ This project is a full-stack application for persona-driven document intelligenc
 ```
 adobe/
   ├── main.py                  # Core document intelligence logic
-  ├── main_api.py              # FastAPI backend server
   ├── requirements.txt         # Python dependencies
-  ├── Dockerfile               # Backend Docker build instructions
+  ├── Dockerfile               # Docker build instructions
   ├── download_models.py       # Model download script
   ├── download_st_model.py     # SentenceTransformer model download
-  ├── frontend/                # ReactJS frontend app
-  │   ├── src/
-  │   │   ├── App.js           # Main React app
-  │   │   └── ...
-  │   ├── public/
-  │   │   └── index.html
-  │   └── package.json         # Frontend dependencies
-  └── ...
+  ├── input/
+  │   ├── input.json           # Input configuration (see below)
+  │   └── PDF/                 # All PDF files referenced in input.json
+  └── output/
+      └── challenge1b_output.json  # Output file (created after processing)
 ```
-
----
-
-## Architecture
-
-- **Backend:** Python (FastAPI)
-  - Accepts `input.json` and PDFs via `/analyze/` endpoint
-  - Processes documents using NLP and semantic ranking
-  - Returns a tailored JSON output
-- **Frontend:** ReactJS
-  - Uploads files to backend
-  - Shows progress/errors
-  - Provides download link for results
-- **Docker:** Backend is containerized for easy deployment
-
----
-
-## Getting Started
-
-### Prerequisites
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (for backend)
-- [Node.js & npm](https://nodejs.org/) (for frontend development)
-
-### 1. Backend (Docker)
-
-Build and run the backend API:
-
-```sh
-# In the adobe/ directory
-# Build the Docker image
-docker build -t persona-doc-intel-backend .
-
-# Run the backend container
-# (Exposes port 8000 by default)
-docker run -p 8000:8000 persona-doc-intel-backend
-```
-
-### 2. Frontend (ReactJS)
-
-```sh
-cd frontend
-npm install
-npm start
-```
-- The frontend will run on [http://localhost:3000](http://localhost:3000) by default.
-- Make sure the backend is running on port 8000 for API requests to work.
 
 ---
 
 ## Usage
 
-1. **Prepare your files:**
-   - `input.json` (specifies persona, job, and document filenames)
-   - PDFs (must match filenames in `input.json`)
-2. **Open the frontend:**
-   - Go to [http://localhost:3000](http://localhost:3000)
-3. **Upload files:**
-   - Upload `input.json` and all required PDFs
-   - Click **Analyze**
-4. **Download results:**
-   - When processing is complete, download `challenge1b_output.json`
+### 1. Prepare your files
+- Place your `input.json` in `adobe/input/`.
+- Place all referenced PDFs in `adobe/input/PDF/`.
 
----
-
-## Example `input.json`
-
+Example `input.json`:
 ```json
 {
-  "persona": { "role": "Researcher" },
-  "job_to_be_done": { "task": "Find key findings and methodology" },
+  "persona": { "role": "Travel Planner" },
+  "job_to_be_done": { "task": "Plan a trip of 4 days for a group of 10 college friends." },
   "documents": [
-    { "filename": "Document1.pdf" },
-    { "filename": "Document2.pdf" }
+    { "filename": "South of France - Cities.pdf" },
+    { "filename": "South of France - Cuisine.pdf" }
   ]
 }
 ```
 
+### 2. Build the Docker image
+From the project root:
+```sh
+docker build -t my-backend-app ./adobe
+```
+
+### 3. Run the Docker container (with input/output folders mounted)
+Replace `<ABSOLUTE_PATH>` with your full path to the project directory (see below for Windows example):
+
+```sh
+docker run \
+  -v <ABSOLUTE_PATH>/adobe/input:/app/adobe/input \
+  -v <ABSOLUTE_PATH>/adobe/output:/app/adobe/output \
+  my-backend-app
+```
+
+#### Example for Windows PowerShell
+```powershell
+docker run -v C:/Users/asus/OneDrive/Desktop/Adobe_Hackathon/Adobe-India-Hackathon25/Challenge_1b/adobe/input:/app/adobe/input -v C:/Users/asus/OneDrive/Desktop/Adobe_Hackathon/Adobe-India-Hackathon25/Challenge_1b/adobe/output:/app/adobe/output my-backend-app
+```
+
+### 4. Check the output
+- After the container finishes, the results will be in `adobe/output/challenge1b_output.json`.
+
 ---
-Screeshots:<img width="1600" height="900" alt="Image" src="https://github.com/user-attachments/assets/fbb136c6-e4de-4756-80a3-a76456fbf321" />
+
+## Notes
+- There is **no web API** and **no frontend**. All processing is done in batch mode.
+- You can edit `input.json` and add/remove PDFs in the `PDF` folder as needed.
+- If you want to change the output location, edit `main.py`.
+
+---
 
 ## Troubleshooting
-
-- **Docker error:**
-  - Ensure Docker Desktop is running before building or running the backend container.
-- **Frontend cannot connect to backend:**
-  - Make sure backend is running on port 8000 and accessible.
-- **File upload errors:**
-  - Ensure all PDFs listed in `input.json` are uploaded.
+- **No output file?**
+  - Make sure you mounted the output folder as shown above.
+  - Check Docker logs for errors (e.g., missing models, bad input.json, missing PDFs).
+- **Model download issues?**
+  - The Dockerfile runs scripts to download required models. Ensure you have internet access during build.
 
 ---
 
-## Made By
-Viyom shukla,Nikhil sharma,utkarsh mishra
+## Authors
+Viyom Shukla, Nikhil Sharma, Utkarsh Mishra
