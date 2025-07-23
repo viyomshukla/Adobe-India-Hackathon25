@@ -90,7 +90,7 @@ README.md
 - 
 
 ---
-##Screeshots <img width="1600" height="900" alt="Image" src="https://github.com/user-attachments/assets/49876f3d-a45d-4bdb-a722-3fd06e6df943" />
+
 
 ## 📝 Notes
 
