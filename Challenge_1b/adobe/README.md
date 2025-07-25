@@ -1,4 +1,4 @@
-# Persona-Driven Document Intelligence (Batch Version)
+# Persona-Driven Document Intelligence 
 
 This project processes a set of PDFs and an input.json file to generate a persona-driven analysis as a JSON output. The backend is built with Python and runs as a batch job (no API, no frontend).
 
