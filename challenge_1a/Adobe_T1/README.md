@@ -1,4 +1,4 @@
-# 🧾 Round 1A: Document Outline Extraction Task
+# 🧾 Round 1A: Understand Your Document
 
 ## 🧩 Theme: Making Sense of Documents Structurally
 
