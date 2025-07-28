@@ -29,7 +29,7 @@ The expected output includes:
 
 This structured understanding becomes the **foundation** for the next round.
 
-➡️ For more information, refer to [`Challenge_1a/Adobe_T1/README.md`](Challenge_1a/Adobe_T1/README.md)
+➡️ For more information, refer to [`https://github.com/viyomshukla/Adobe-India-Hackathon25/blob/main/challenge_1a/Adobe_T1/README.md`](Challenge_1a/Adobe_T1/README.md)
 
 ---
 
